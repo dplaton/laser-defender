@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 4dfb9e9a65efbaa4cbd4ff9d48e61413
+timeCreated: 1503768282
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: BrokenMachine
+  fontNames:
+  - BrokenMachine
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

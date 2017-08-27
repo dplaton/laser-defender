@@ -5,11 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public float speed = 10f;
-    public float padding = 1f;
+    float padding;
     float minX;
     float maxX;
 
     private void Start() {
+        padding = this.GetComponent<SpriteRenderer>().size.x;
+
         // the distance between the camera and the object's plane
         float distance = transform.position.z - Camera.main.transform.position.z;
 

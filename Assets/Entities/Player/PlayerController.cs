@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+    public GameObject bulletPrefab; 
     public float speed = 10f;
+    public float bulletSpeed;
+
     float padding;
     float minX;
     float maxX;
 
+    Vector2 size;
+
     private void Start() {
-        padding = this.GetComponent<SpriteRenderer>().size.x;
+        size = this.GetComponent<SpriteRenderer>().size;
+        padding = size.x;
 
         // the distance between the camera and the object's plane
         float distance = transform.position.z - Camera.main.transform.position.z;
@@ -36,6 +42,12 @@ public class PlayerController : MonoBehaviour {
 
         float newX = Mathf.Clamp(transform.position.x, minX, maxX);
         transform.position = new Vector3(newX, transform.position.y, 0);
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            Vector3 bulletPosition = transform.position + new Vector3(0, size.y / 2);
+            GameObject bullet = Instantiate(bulletPrefab, bulletPosition, Quaternion.identity) as GameObject;
+            bullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, bulletSpeed);
+        }
     }
 
 

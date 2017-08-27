@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject bulletPrefab; 
     public float speed = 10f;
     public float bulletSpeed;
+    public float firingRate = 0.2f;
 
     float padding;
     float minX;
@@ -29,6 +30,12 @@ public class PlayerController : MonoBehaviour {
         maxX = rightMost.x - padding;
     }
 
+    void Fire() {
+        Vector3 bulletPosition = transform.position + new Vector3(0, size.y / 2);
+        GameObject bullet = Instantiate(bulletPrefab, bulletPosition, Quaternion.identity) as GameObject;
+        bullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, bulletSpeed);
+    }
+
     // Update is called once per frame
     void Update() {
 
@@ -44,9 +51,10 @@ public class PlayerController : MonoBehaviour {
         transform.position = new Vector3(newX, transform.position.y, 0);
 
         if (Input.GetKeyDown(KeyCode.Space)) {
-            Vector3 bulletPosition = transform.position + new Vector3(0, size.y / 2);
-            GameObject bullet = Instantiate(bulletPrefab, bulletPosition, Quaternion.identity) as GameObject;
-            bullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, bulletSpeed);
+            InvokeRepeating("Fire", 0.0000001f, firingRate);
+        }
+        if (Input.GetKeyUp(KeyCode.Space)) {
+            CancelInvoke("Fire");
         }
     }
 

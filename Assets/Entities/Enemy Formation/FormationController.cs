@@ -9,6 +9,7 @@ public class FormationController : MonoBehaviour {
     public float speed = 2.5f;
     public float width;
     public float height;
+	public float spawnDelay = 0.5f;
 
     float xMin;
     float xMax;
@@ -17,7 +18,7 @@ public class FormationController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		SpawnEnemyFormation ();
+		SpawnUntilFull ();
         // the distance between the camera and the object's plane
         float distance = transform.position.z - Camera.main.transform.position.z;
 
@@ -49,7 +50,7 @@ public class FormationController : MonoBehaviour {
 
 		if (AllMembersAreDead ()) {
 			Debug.Log ("Squad killed");
-			SpawnEnemyFormation ();
+			SpawnUntilFull ();
 		}
     }
 
@@ -63,10 +64,25 @@ public class FormationController : MonoBehaviour {
 		return true;
 	}
 
-	void SpawnEnemyFormation() {
+	Transform NextFreePosition() {
 		foreach (Transform child in transform) {
-			GameObject enemy = Instantiate(enemyPrefab,child.position, Quaternion.identity) as GameObject;
-			enemy.transform.parent = child;
+			if (child.childCount == 0) {
+				return child;
+			}
+		}
+
+		return null;
+	}
+
+	void SpawnUntilFull() {
+		Debug.Log ("Spawining enemies");
+		Transform nextFreePosition = NextFreePosition ();
+		if (nextFreePosition != null) {
+			GameObject enemy = Instantiate (enemyPrefab, nextFreePosition.position, Quaternion.identity) as GameObject;
+			enemy.transform.parent = nextFreePosition;
+		}
+		if (NextFreePosition()) {
+			Invoke ("SpawnUntilFull", spawnDelay);
 		}
 	}
 }

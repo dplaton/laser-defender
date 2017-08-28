@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     public float speed = 10f;
     public float bulletSpeed;
     public float firingRate = 0.2f;
+	public float health = 250f;
 
     float padding;
     float minX;
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Fire() {
-        Vector3 bulletPosition = transform.position + new Vector3(0, size.y / 2);
+        Vector3 bulletPosition = transform.position + new Vector3(0, size.y);
         GameObject bullet = Instantiate(bulletPrefab, bulletPosition, Quaternion.identity) as GameObject;
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, bulletSpeed);
     }
@@ -57,6 +58,19 @@ public class PlayerController : MonoBehaviour {
             CancelInvoke("Fire");
         }
     }
+
+	void OnTriggerEnter2D(Collider2D collider) {
+		Projectile bullet = collider.gameObject.GetComponent<Projectile> ();
+		if (bullet) {
+			bullet.Hit ();
+			health -= bullet.GetDamage ();
+			Debug.Log ("Player hit!");
+			if (health <= 0) {
+				Destroy (gameObject);
+			}
+		}
+	}
+
 
 
 }

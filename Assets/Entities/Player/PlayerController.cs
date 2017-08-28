@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Fire() {
-        Vector3 bulletPosition = transform.position + new Vector3(0, size.y);
+        Vector3 bulletPosition = transform.position + new Vector3(0, size.y / 2);
         GameObject bullet = Instantiate(bulletPrefab, bulletPosition, Quaternion.identity) as GameObject;
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, bulletSpeed);
     }
@@ -64,7 +64,6 @@ public class PlayerController : MonoBehaviour {
 		if (bullet) {
 			bullet.Hit ();
 			health -= bullet.GetDamage ();
-			Debug.Log ("Player hit!");
 			if (health <= 0) {
 				Destroy (gameObject);
 			}

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBehavior : MonoBehaviour {
+public class EnemyController : MonoBehaviour {
 
 	public GameObject bulletPrefab;
 	public float health = 200f;
@@ -16,12 +16,12 @@ public class EnemyBehavior : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collider) {
 		Projectile bullet = collider.gameObject.GetComponent<Projectile> ();
-		Debug.Log("Enemy hit!");
+
 		if (bullet) {
 			health -= bullet.GetDamage ();
 			bullet.Hit ();
 			if (health <= 0) {
-			//	Destroy (gameObject);
+				Destroy (gameObject);
 			}
 		}
 	}

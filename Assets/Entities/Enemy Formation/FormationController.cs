@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour {
+public class FormationController : MonoBehaviour {
 
     public GameObject enemyPrefab;
 
@@ -17,11 +17,7 @@ public class EnemySpawner : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        foreach (Transform child in transform) {
-            GameObject enemy = Instantiate(enemyPrefab,child.position, Quaternion.identity) as GameObject;
-            enemy.transform.parent = child;
-        }
-
+		SpawnEnemyFormation ();
         // the distance between the camera and the object's plane
         float distance = transform.position.z - Camera.main.transform.position.z;
 
@@ -50,5 +46,28 @@ public class EnemySpawner : MonoBehaviour {
         } else if (leftEdge < xMin) {
             movingRight = true;
         }
+
+		if (AllMembersAreDead ()) {
+			Debug.Log ("Squad killed");
+			SpawnEnemyFormation ();
+		}
     }
+
+	bool AllMembersAreDead() {
+		foreach (Transform childPosition in transform) {
+			// the enemy ship is the child of the position
+			if (childPosition.childCount > 0){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	void SpawnEnemyFormation() {
+		foreach (Transform child in transform) {
+			GameObject enemy = Instantiate(enemyPrefab,child.position, Quaternion.identity) as GameObject;
+			enemy.transform.parent = child;
+		}
+	}
 }
+

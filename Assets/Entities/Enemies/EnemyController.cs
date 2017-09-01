@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour {
 
 	public GameObject bulletPrefab;
 	public float health = 200f;
-	public float shotsPerSecond = 0.5f;
+	public float shotsPerSecond = 0.2f;
 	public AudioClip downSound;
 	public AudioClip fireSound;
 

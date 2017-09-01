@@ -75,15 +75,17 @@ public class FormationController : MonoBehaviour {
 	}
 
 	void SpawnUntilFull() {
-		Debug.Log ("Spawining enemies");
 		Transform nextFreePosition = NextFreePosition ();
 		if (nextFreePosition != null) {
+			Debug.Log ("Spawning enemy ship...");
 			GameObject enemy = Instantiate (enemyPrefab, nextFreePosition.position, Quaternion.identity) as GameObject;
+			enemy.GetComponent<Animator> ().SetInteger ("animation",Random.Range(1,3));
 			enemy.transform.parent = nextFreePosition;
 		}
 		if (NextFreePosition()) {
 			Invoke ("SpawnUntilFull", spawnDelay);
 		}
+
 	}
 }
 

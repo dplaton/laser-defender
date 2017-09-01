@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
     public float bulletSpeed;
     public float firingRate = 0.2f;
 	public float health = 250f;
+	public AudioClip fireSound;
 
     float padding;
     float minX;
@@ -33,8 +34,9 @@ public class PlayerController : MonoBehaviour {
 
     void Fire() {
         Vector3 bulletPosition = transform.position + new Vector3(0, size.y / 2);
-        GameObject bullet = Instantiate(bulletPrefab, bulletPosition, Quaternion.identity) as GameObject;
+		GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity) as GameObject;
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, bulletSpeed);
+		AudioSource.PlayClipAtPoint (fireSound, transform.position, 0.7f);
     }
 
     // Update is called once per frame

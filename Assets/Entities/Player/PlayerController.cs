@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     public float firingRate = 0.2f;
 	public float health = 250f;
 	public AudioClip fireSound;
+	public HealthBarController healthBar;
 
     float padding;
     float minX;
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour {
 		Debug.Log ("hit!");
 		if (bullet) {
 			bullet.Hit ();
+//			healthBar.DecreaseHealth (bullet.GetDamage ());
 			health -= bullet.GetDamage ();
 			if (health <= 0) {
 				Die ();

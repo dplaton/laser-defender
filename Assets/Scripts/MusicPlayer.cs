@@ -11,6 +11,10 @@ public class MusicPlayer : MonoBehaviour {
 
 	private AudioSource music;
 
+	void Awake() {
+		music = this.GetComponent<AudioSource>();
+	}
+
 	void Start () {
 		if (instance != null && instance != this) {
 			Destroy (gameObject);
@@ -18,8 +22,8 @@ public class MusicPlayer : MonoBehaviour {
 		} else {
 			instance = this;
 			GameObject.DontDestroyOnLoad(gameObject);
-			music = GetComponent<AudioSource> ();
-			Debug.Log ("Music? " + music);
+
+				Debug.Log (music);
 		}
 		
 	}
@@ -33,7 +37,9 @@ public class MusicPlayer : MonoBehaviour {
 	}
 
 	void OnLevelFinishedLoading(Scene theScene, LoadSceneMode mode) {
+		Debug.Log ("Level finished loading - " + theScene.name);
 		if (music == null) {
+			Debug.Log ("Music is null");
 			return;
 		}
 		
@@ -46,8 +52,8 @@ public class MusicPlayer : MonoBehaviour {
 		} else if (theScene.name.Equals ("Win Screen")) {
 			music.clip = endClip;
 		}
-
+		Debug.Log ("Playing " + music.clip.name);
 		music.loop = true;
-		music.Play ();
+		music.Play();
 	}
 }

@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FormationController : MonoBehaviour {
+public class BackRowController : RootFormationController {
 
     public GameObject enemyPrefab;
 
     public float speed = 2.5f;
     public float width;
     public float height;
-	public float spawnDelay = 0.5f;
 
     float xMin;
     float xMax;
@@ -17,8 +16,9 @@ public class FormationController : MonoBehaviour {
     private bool movingRight;
 
     // Use this for initialization
-    void Start () {
-		SpawnUntilFull ();
+    void Start() {
+        Debug.Log("Spawning formation " + name);
+        SpawnUntilFull();
         // the distance between the camera and the object's plane
         float distance = transform.position.z - Camera.main.transform.position.z;
 
@@ -28,6 +28,7 @@ public class FormationController : MonoBehaviour {
 
         xMin = leftMost.x;
         xMax = rightMost.x;
+        movingRight = false;
     }
 
     private void OnDrawGizmos() {
@@ -35,10 +36,10 @@ public class FormationController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update() {
         Vector3 direction = movingRight ? Vector3.right : Vector3.left;
         transform.position += direction * speed * Time.deltaTime;
- 
+
         float rightEdge = transform.position.x + (0.5f * width);
         float leftEdge = transform.position.x - (0.5f * width);
 
@@ -48,44 +49,16 @@ public class FormationController : MonoBehaviour {
             movingRight = true;
         }
 
-		if (AllMembersAreDead ()) {
-			Debug.Log ("Squad killed");
-			SpawnUntilFull ();
-		}
+        if (AllMembersAreDead()) {
+            Debug.Log("Squad killed");
+            SpawnUntilFull();
+        }
     }
 
-	bool AllMembersAreDead() {
-		foreach (Transform childPosition in transform) {
-			// the enemy ship is the child of the position
-			if (childPosition.childCount > 0){
-				return false;
-			}
-		}
-		return true;
-	}
+    protected override GameObject GetEnemyPrefab() {
+        return enemyPrefab;
+    }
 
-	Transform NextFreePosition() {
-		foreach (Transform child in transform) {
-			if (child.childCount == 0) {
-				return child;
-			}
-		}
 
-		return null;
-	}
-
-	void SpawnUntilFull() {
-		Transform nextFreePosition = NextFreePosition ();
-		if (nextFreePosition != null) {
-			Debug.Log ("Spawning enemy ship...");
-			GameObject enemy = Instantiate (enemyPrefab, nextFreePosition.position, Quaternion.identity) as GameObject;
-			enemy.GetComponent<Animator> ().SetInteger ("animation",Random.Range(1,3));
-			enemy.transform.parent = nextFreePosition;
-		}
-		if (NextFreePosition()) {
-			Invoke ("SpawnUntilFull", spawnDelay);
-		}
-
-	}
 }
 

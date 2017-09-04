@@ -64,7 +64,6 @@ public class PlayerController : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collider) {
 		Projectile bullet = collider.gameObject.GetComponent<Projectile> ();
-		Debug.Log ("hit!");
 		if (bullet) {
 			bullet.Hit ();
 //			healthBar.DecreaseHealth (bullet.GetDamage ());

@@ -10,12 +10,16 @@ public class EnemyController : MonoBehaviour {
 	public AudioClip downSound;
 	public AudioClip fireSound;
 
+    public float soundVolume;
+
 	Vector2 size;
 	ScoreKeeper scoreKeeper;
+    private AudioSource audioSource;
 
 	void Start() {
 		size = this.GetComponent<SpriteRenderer> ().size;
 		scoreKeeper = GameObject.Find ("Score").GetComponent<ScoreKeeper> ();
+        audioSource = GetComponent<AudioSource>();
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {
@@ -40,12 +44,15 @@ public class EnemyController : MonoBehaviour {
 	void Fire() {
 		GameObject bullet = Instantiate (bulletPrefab, transform.position, Quaternion.identity) as GameObject;
 		bullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, -10f);
-		AudioSource.PlayClipAtPoint (fireSound, transform.position,0.7f);
+        //AudioSource.PlayClipAtPoint (fireSound, transform.position, soundVolume);
+        SoundManager.PlayClipAt(fireSound, transform.position);
 	}
 
 	void Die() {
 		scoreKeeper.Score (1);
-		AudioSource.PlayClipAtPoint (downSound, transform.position, 1f);
+		SoundManager.PlayClipAt (downSound, transform.position);
 		Destroy (gameObject);
 	}
+    
+
 }

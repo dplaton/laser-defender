@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour {
         Vector3 bulletPosition = transform.position + new Vector3(0, size.y / 2);
 		GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity) as GameObject;
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, bulletSpeed);
-		AudioSource.PlayClipAtPoint (fireSound, transform.position, 0.7f);
+		SoundManager.PlayClipAt(fireSound, transform.position);
     }
 
     // Update is called once per frame

@@ -36,7 +36,7 @@ public class MusicPlayer : MonoBehaviour {
 
 	void OnLevelFinishedLoading(Scene theScene, LoadSceneMode mode) {
 		if (music == null) {
-			Debug.Log ("Music is null");
+			Debug.LogError ("Music is null");
 			return;
 		}
 		

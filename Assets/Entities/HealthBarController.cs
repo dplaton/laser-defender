@@ -9,7 +9,6 @@ public class HealthBarController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log ("Running start");
 		curHealth = maxHealth;
 	}
 

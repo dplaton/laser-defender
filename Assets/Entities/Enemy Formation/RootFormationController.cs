@@ -31,12 +31,8 @@ abstract public class RootFormationController : MonoBehaviour {
             spawnedCnt++;
 			enemy.GetComponent<Animator> ().SetInteger ("animation", GetAnimationId ());
             enemy.transform.parent = nextFreePosition;
-            enemy.name = "Enemy " + spawnedCnt + " (animation " + enemy.GetComponent<Animator>().GetInteger("animation") + ")";
-            Debug.Log("Spawning " + enemy.name);
-
         }
         if (NextFreePosition()) {
-            Debug.Log("Invoking SpawnUntilFull in " + name);
             Invoke("SpawnUntilFull", spawnDelay);
         }
 

@@ -17,7 +17,6 @@ public class FrontRowController : RootFormationController {
 
     // Use this for initialization
     void Start () {
-        Debug.Log("Spawning formation " + name);
 		SpawnUntilFull ();
         // the distance between the camera and the object's plane
         float distance = transform.position.z - Camera.main.transform.position.z;
@@ -49,7 +48,6 @@ public class FrontRowController : RootFormationController {
         }
 
 		if (AllMembersAreDead ()) {
-			Debug.Log ("Squad killed");
 			SpawnUntilFull ();
 		}
     }

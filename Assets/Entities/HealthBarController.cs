@@ -19,6 +19,6 @@ public class HealthBarController : MonoBehaviour {
 	}
 
 	void UpdateHealthBar(float health) {
-		transform.localScale = new Vector2 (health, transform.localScale.y);
+		transform.localScale = new Vector2 (Mathf.Clamp(health, 0, 1), transform.localScale.y);
 	}
 }

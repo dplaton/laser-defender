@@ -6,20 +6,15 @@ public class EnemyController : MonoBehaviour {
 
 	public GameObject bulletPrefab;
 	public float health = 200f;
-	public float shotsPerSecond = 2.5f;
+	public float shotsPerSecond = 2f;
 	public AudioClip downSound;
 	public AudioClip fireSound;
 
     public float soundVolume;
-
-	Vector2 size;
 	ScoreKeeper scoreKeeper;
-    private AudioSource audioSource;
 
 	void Start() {
-		size = this.GetComponent<SpriteRenderer> ().size;
 		scoreKeeper = GameObject.Find ("Score").GetComponent<ScoreKeeper> ();
-        audioSource = GetComponent<AudioSource>();
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {

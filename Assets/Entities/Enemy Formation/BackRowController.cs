@@ -37,6 +37,7 @@ public class BackRowController : RootFormationController {
 
     // Update is called once per frame
     void Update() {
+       
         Vector3 direction = movingRight ? Vector3.right : Vector3.left;
         transform.position += direction * speed * Time.deltaTime;
 
@@ -60,7 +61,7 @@ public class BackRowController : RootFormationController {
     }
 
 	protected override int GetAnimationId() {
-		return 1;
+		return 2;
 	}
 }
 

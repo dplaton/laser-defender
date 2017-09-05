@@ -34,7 +34,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Fire() {
-        Vector3 bulletPosition = transform.position + new Vector3(0, size.y / 2);
 		GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity) as GameObject;
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, bulletSpeed);
 		SoundManager.PlayClipAt(fireSound, transform.position);
@@ -66,7 +65,7 @@ public class PlayerController : MonoBehaviour {
 		Projectile bullet = collider.gameObject.GetComponent<Projectile> ();
 		if (bullet) {
 			bullet.Hit ();
-//			healthBar.DecreaseHealth (bullet.GetDamage ());
+			healthBar.DecreaseHealth (bullet.GetDamage ());
 			health -= bullet.GetDamage ();
 			if (health <= 0) {
 				Die ();

@@ -13,7 +13,7 @@ public class FrontRowController : RootFormationController {
     float xMin;
     float xMax;
 
-    private bool movingRight;
+    private bool movingRight = true;
 
     // Use this for initialization
     void Start () {

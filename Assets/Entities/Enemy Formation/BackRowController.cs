@@ -59,6 +59,8 @@ public class BackRowController : RootFormationController {
         return enemyPrefab;
     }
 
-
+	protected override int GetAnimationId() {
+		return 1;
+	}
 }
 

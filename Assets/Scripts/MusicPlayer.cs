@@ -22,8 +22,6 @@ public class MusicPlayer : MonoBehaviour {
 		} else {
 			instance = this;
 			GameObject.DontDestroyOnLoad(gameObject);
-
-				Debug.Log (music);
 		}
 		
 	}
@@ -37,7 +35,6 @@ public class MusicPlayer : MonoBehaviour {
 	}
 
 	void OnLevelFinishedLoading(Scene theScene, LoadSceneMode mode) {
-		Debug.Log ("Level finished loading - " + theScene.name);
 		if (music == null) {
 			Debug.Log ("Music is null");
 			return;
@@ -52,7 +49,6 @@ public class MusicPlayer : MonoBehaviour {
 		} else if (theScene.name.Equals ("Win Screen")) {
 			music.clip = endClip;
 		}
-		Debug.Log ("Playing " + music.clip.name);
 		music.loop = true;
 		music.Play();
 	}

@@ -29,7 +29,7 @@ abstract public class RootFormationController : MonoBehaviour {
         if (nextFreePosition != null) {
             GameObject enemy = Instantiate(GetEnemyPrefab(), nextFreePosition.position, Quaternion.identity) as GameObject;
             spawnedCnt++;
-            enemy.GetComponent<Animator>().SetInteger("animation",1);
+			enemy.GetComponent<Animator> ().SetInteger ("animation", GetAnimationId ());
             enemy.transform.parent = nextFreePosition;
             enemy.name = "Enemy " + spawnedCnt + " (animation " + enemy.GetComponent<Animator>().GetInteger("animation") + ")";
             Debug.Log("Spawning " + enemy.name);
@@ -43,5 +43,7 @@ abstract public class RootFormationController : MonoBehaviour {
     }
 
     protected abstract GameObject GetEnemyPrefab();
+
+	protected abstract int GetAnimationId ();
 
 }

@@ -58,6 +58,9 @@ public class FrontRowController : RootFormationController {
         return enemyPrefab;
     }
 
+	protected override int GetAnimationId() {
+		return 2;
+	}
 
 }
 

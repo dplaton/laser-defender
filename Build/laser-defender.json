@@ -1,0 +1,9 @@
+{
+"TOTAL_MEMORY": 268435456,
+"dataUrl": "laser-defender.data.unityweb",
+"asmCodeUrl": "laser-defender.asm.code.unityweb",
+"asmMemoryUrl": "laser-defender.asm.memory.unityweb",
+"asmFrameworkUrl": "laser-defender.asm.framework.unityweb",
+"splashScreenStyle": "Dark",
+"backgroundColor": "#222C36"
+}
